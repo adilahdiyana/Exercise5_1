@@ -1,23 +1,22 @@
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
-public class Add_Minus {
+public class AddMinus {
 
 	private JFrame frame;
-	private JTextField XField;
-	private JTextField YField;
-	private JTextField TotalField;
+	private JTextField AddTextField;
+	private JTextField MinusTextField;
+	private JTextField AnswerText;
 
 	/**
 	 * Launch the application.
@@ -26,7 +25,7 @@ public class Add_Minus {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Add_Minus window = new Add_Minus();
+					AddMinus window = new AddMinus();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -38,7 +37,7 @@ public class Add_Minus {
 	/**
 	 * Create the application.
 	 */
-	public Add_Minus() {
+	public AddMinus() {
 		initialize();
 	}
 
@@ -47,79 +46,87 @@ public class Add_Minus {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 783, 506);
+		frame.getContentPane().setBackground(new Color(204, 102, 51));
+		frame.setBounds(100, 100, 621, 366);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JLabel XLabel = new JLabel("X");
-		XLabel.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 25));
-		XLabel.setBounds(139, 87, 39, 35);
-		frame.getContentPane().add(XLabel);
+		AddTextField = new JTextField();
+		AddTextField.setBackground(new Color(230, 230, 250));
+		AddTextField.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		AddTextField.setBounds(113, 58, 143, 50);
+		frame.getContentPane().add(AddTextField);
+		AddTextField.setColumns(10);
 		
-		JLabel YLabel = new JLabel("Y");
-		YLabel.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 25));
-		YLabel.setBounds(515, 87, 39, 35);
-		frame.getContentPane().add(YLabel);
-		
-		XField = new JTextField();
-		XField.setBounds(93, 132, 123, 41);
-		frame.getContentPane().add(XField);
-		XField.setColumns(10);
-		
-		YField = new JTextField();
-		YField.setText("");
-		YField.setBounds(474, 132, 123, 41);
-		frame.getContentPane().add(YField);
-		YField.setColumns(10);
+		MinusTextField = new JTextField();
+		MinusTextField.setBackground(new Color(230, 230, 250));
+		MinusTextField.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		MinusTextField.setBounds(358, 58, 152, 50);
+		frame.getContentPane().add(MinusTextField);
+		MinusTextField.setColumns(10);
 		
 		JButton AddButton = new JButton("ADD");
-		AddButton.setBackground(Color.BLUE);
-		AddButton.setForeground(Color.CYAN);
+		AddButton.setForeground(Color.BLACK);
+		AddButton.setBackground(new Color(255, 235, 205));
+		AddButton.setFont(new Font("STZhongsong", Font.BOLD, 20));
 		AddButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				
+				int ans=0;
+				int[] num = new int[2];
 				try {
-					int x = Integer.parseInt(XField.getText());
-					int y = Integer.parseInt(YField.getText());
-					int ans = x + y;
-					
-					TotalField.setText(Integer.toString(ans));
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Please enter only integer number");
+					num[0] = Integer.parseInt(AddTextField.getText());
+					num[1] = Integer.parseInt(MinusTextField.getText());
+					for(int i=0; i<num.length; i++) {
+						ans = ans+num[i];
+					}
+					//answer = num1+num2;
+					AnswerText.setText(Integer.toString(ans));
+				} catch(Exception e) {
+					JOptionPane.showMessageDialog(null, "Please enter a valid number.");
 				}
 			}
 		});
-		AddButton.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 25));
-		AddButton.setBounds(179, 254, 123, 38);
+		
+		AddButton.setBounds(130, 144, 102, 50);
 		frame.getContentPane().add(AddButton);
 		
 		JButton MinusButton = new JButton("MINUS");
-		MinusButton.setBackground(Color.RED);
-		MinusButton.setForeground(Color.PINK);
+		MinusButton.setForeground(Color.BLACK);
+		MinusButton.setBackground(new Color(255, 239, 213));
 		MinusButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					int x = Integer.parseInt(XField.getText());
-					int y = Integer.parseInt(YField.getText());
-					int ans = x - y;
+			public void actionPerformed(ActionEvent e) {
+				int ans=0;
+				int[] num = new int[2];
+				try {num[0] = Integer.parseInt(AddTextField.getText());
+					num[1] = Integer.parseInt(MinusTextField.getText());
 					
-					TotalField.setText(Integer.toString(ans));
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Please enter only integer number");
+					for(int i=0; i<num.length; i++) {
+						ans = num[0]-num[1];
+					}
+					//answer = num1-num2-num3;
+					AnswerText.setText(Integer.toString(ans));
+			} catch(Exception e1) {
+				JOptionPane.showMessageDialog(null,  "Please enter a valid number.");
+						
 				}
 			}
 		});
-		MinusButton.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 25));
-		MinusButton.setBounds(394, 254, 123, 38);
+		MinusButton.setFont(new Font("STZhongsong", Font.BOLD, 20));
+		MinusButton.setBounds(379, 144, 110, 50);
 		frame.getContentPane().add(MinusButton);
 		
-		TotalField = new JTextField();
-		TotalField.setBounds(318, 371, 163, 35);
-		frame.getContentPane().add(TotalField);
-		TotalField.setColumns(10);
+		AnswerText = new JTextField();
+		AnswerText.setBackground(new Color(230, 230, 250));
+		AnswerText.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		AnswerText.setBounds(258, 247, 158, 41);
+		frame.getContentPane().add(AnswerText);
+		AnswerText.setColumns(10);
 		
-		JLabel TotalLabel = new JLabel("TOTAL");
-		TotalLabel.setFont(new Font("Times New Roman", Font.BOLD | Font.ITALIC, 25));
-		TotalLabel.setBounds(205, 367, 123, 35);
-		frame.getContentPane().add(TotalLabel);
+		JLabel TheAnswerIsLabel = new JLabel("The answer is");
+		TheAnswerIsLabel.setForeground(Color.BLACK);
+		TheAnswerIsLabel.setFont(new Font("Segoe UI Semibold", Font.BOLD, 20));
+		TheAnswerIsLabel.setBounds(120, 247, 158, 33);
+		frame.getContentPane().add(TheAnswerIsLabel);
 	}
-}
+
