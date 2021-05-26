@@ -112,6 +112,7 @@ public class AddMinus {
 				}
 			}
 		});
+		
 		MinusButton.setFont(new Font("STZhongsong", Font.BOLD, 20));
 		MinusButton.setBounds(379, 144, 110, 50);
 		frame.getContentPane().add(MinusButton);
